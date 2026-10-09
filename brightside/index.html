@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrightSide 🌟 — You Are Not Alone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="logo">🌟 BrightSide</div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#tasks">Tasks</a>
+    <a href="#songs">Songs</a>
+    <a href="#jokes">Jokes</a>
+    <a href="#affirmations">Affirmations</a>
+  </div>
+  <div class="points-badge" id="nav-points">
+    <i class="fa fa-star"></i> <span id="nav-score">0</span> pts
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Hey, you matter. 💛</h1>
+    <p>It's okay not to be okay. BrightSide is your cozy corner to heal, smile, and grow — one tiny step at a time.</p>
+    <div class="hero-name-box">
+      <input type="text" id="username-input" placeholder="What's your name?" maxlength="20"/>
+      <button onclick="setName()">Let's go ✨</button>
+    </div>
+    <p class="welcome-msg" id="welcome-msg"></p>
+  </div>
+  <div class="floating-emojis">
+    <span>🌸</span><span>☀️</span><span>🎵</span><span>💪</span><span>😊</span><span>🌈</span>
+  </div>
+</section>
+
+<!-- POINTS DASHBOARD -->
+<section class="dashboard" id="dashboard">
+  <div class="dashboard-card">
+    <div class="dash-icon">⭐</div>
+    <div>
+      <div class="dash-value" id="total-points">0</div>
+      <div class="dash-label">Total Points</div>
+    </div>
+  </div>
+  <div class="dashboard-card">
+    <div class="dash-icon">🔥</div>
+    <div>
+      <div class="dash-value" id="streak-count">0</div>
+      <div class="dash-label">Day Streak</div>
+    </div>
+  </div>
+  <div class="dashboard-card">
+    <div class="dash-icon">🏅</div>
+    <div>
+      <div class="dash-value" id="tasks-done">0</div>
+      <div class="dash-label">Tasks Done</div>
+    </div>
+  </div>
+  <div class="dashboard-card share-card" onclick="sharePoints()">
+    <div class="dash-icon">📤</div>
+    <div>
+      <div class="dash-value">Share</div>
+      <div class="dash-label">with Friends</div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS SECTION -->
+<section class="section" id="tasks">
+  <h2 class="section-title">🎯 Daily Wellness Tasks</h2>
+  <p class="section-sub">Complete tasks, earn points, share your wins!</p>
+  <div class="tasks-grid" id="tasks-grid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- SONGS SECTION -->
+<section class="section songs-section" id="songs">
+  <h2 class="section-title">🎵 Feel-Good Songs</h2>
+  <p class="section-sub">Hit play, lift your mood, earn 15 points!</p>
+  <div class="songs-grid" id="songs-grid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- JOKES SECTION -->
+<section class="section jokes-section" id="jokes">
+  <h2 class="section-title">😂 Joke of the Moment</h2>
+  <p class="section-sub">Laughter is medicine — totally free!</p>
+  <div class="joke-card" id="joke-card">
+    <p class="joke-text" id="joke-text">Loading a joke for you...</p>
+    <div class="joke-actions">
+      <button class="btn-primary" onclick="newJoke()">🎲 New Joke</button>
+      <button class="btn-secondary" onclick="earnJokePoints()">😂 LOL! (+10 pts)</button>
+    </div>
+  </div>
+</section>
+
+<!-- AFFIRMATIONS SECTION -->
+<section class="section affirmations-section" id="affirmations">
+  <h2 class="section-title">💬 Daily Affirmations</h2>
+  <p class="section-sub">Speak kindly to yourself. You deserve it.</p>
+  <div class="affirmation-card" id="affirmation-card">
+    <div class="affirmation-text" id="affirmation-text">"Loading your affirmation..."</div>
+    <div class="affirmation-actions">
+      <button class="btn-primary" onclick="newAffirmation()">🔄 New Affirmation</button>
+      <button class="btn-secondary" onclick="earnAffirmationPoints()">💛 I believe this! (+20 pts)</button>
+    </div>
+  </div>
+  <div class="affirmation-tabs">
+    <button class="tab-btn active" onclick="filterAffirmations('all', this)">All</button>
+    <button class="tab-btn" onclick="filterAffirmations('self-love', this)">Self Love 💖</button>
+    <button class="tab-btn" onclick="filterAffirmations('strength', this)">Strength 💪</button>
+    <button class="tab-btn" onclick="filterAffirmations('hope', this)">Hope 🌈</button>
+  </div>
+</section>
+
+<!-- BADGE / ACHIEVEMENT TOAST -->
+<div class="toast" id="toast">
+  <span id="toast-msg">🎉 +10 points!</span>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-overlay" id="share-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Share Your Progress! 🚀</h2>
+    <div class="share-card-preview" id="share-preview">
+      <!-- Filled by JS -->
+    </div>
+    <div class="share-btns">
+      <button class="btn-whatsapp" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+      <button class="btn-twitter" onclick="shareTwitter()"><i class="fab fa-twitter"></i> Twitter/X</button>
+      <button class="btn-copy" onclick="copyShareText()"><i class="fa fa-copy"></i> Copy Text</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
